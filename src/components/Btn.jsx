@@ -6,19 +6,19 @@ export const Btn = ({ children, onClick, disabled, full, size = 'md', variant = 
   const h = { sm: 38, md: 52, lg: 56 }[size];
   const styles = {
     primary: {
-      background: disabled ? '#3A2520' : hov ? '#B82A12' : '#E8361A',
+      background: disabled ? '#3A2520' : hov ? '#6E3F40' : '#8C5859',
       color: disabled ? '#6A4040' : '#fff',
-      boxShadow: disabled ? 'none' : hov ? '0 6px 28px rgba(232,54,26,.5)' : '0 4px 20px rgba(232,54,26,.35)',
+      boxShadow: disabled ? 'none' : hov ? '0 6px 28px rgba(232,54,26,.5)' : '0 4px 20px rgba(140,88,89,.45)',
     },
     secondary: {
-      background: hov ? 'rgba(240,192,96,.15)' : 'rgba(240,192,96,.08)',
-      color: '#F0C060',
+      background: hov ? 'rgba(240,192,96,.15)' : 'rgba(140,88,89,.12)',
+      color: '#C9A44A',
       boxShadow: 'none',
       border: '1px solid rgba(240,192,96,.3)',
     },
     ghost: {
-      background: hov ? 'rgba(255,255,255,.08)' : 'transparent',
-      color: '#C4A990',
+      background: hov ? 'rgba(140,88,89,.10)' : 'transparent',
+      color: '#5C3535',
       boxShadow: 'none',
       border: '1px solid rgba(255,255,255,.12)',
     },

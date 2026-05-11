@@ -82,25 +82,25 @@ export default function App() {
         {isMobile && !hideNav && screen !== 'group' && screen !== 'login' && screen !== 'checkout' && (
           <div className="mobile-topbar">
             {screen === 'catalog' || screen === 'cart' || screen === 'profile' ? (
-              <div style={{ flex: 1, fontWeight: 800, fontSize: 18, color: '#F5EDE4' }}>{titles[screen]}</div>
+              <div style={{ flex: 1, fontWeight: 800, fontSize: 18, color: '#1E0E0E' }}>{titles[screen]}</div>
             ) : (
               <div style={{ flex: 1 }}>
-                <div style={{ fontSize: 10, color: '#7A5F50', fontWeight: 700, letterSpacing: 1.5 }}>MEATHUB</div>
-                <div style={{ fontWeight: 900, fontSize: 17, color: '#F5EDE4', lineHeight: 1 }}>בשר פרימיום ישר מהיבואן</div>
+                <div style={{ fontSize: 10, color: '#8C6B5A', fontWeight: 700, letterSpacing: 1.5 }}>MEATHUB</div>
+                <div style={{ fontWeight: 900, fontSize: 17, color: '#1E0E0E', lineHeight: 1 }}>בשר פרימיום ישר מהיבואן</div>
               </div>
             )}
-            <button onClick={() => nav('cart')} style={{ position: 'relative', background: 'rgba(255,255,255,.06)', border: '1px solid rgba(255,255,255,.1)', borderRadius: 11, width: 40, height: 40, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexShrink: 0 }}>
-              <Icon name="cart" size={18} color="#C4A990" />
-              {cart.length > 0 && <div style={{ position: 'absolute', top: -4, left: -4, background: '#E8361A', color: '#fff', fontSize: 9, fontWeight: 800, borderRadius: '50%', width: 15, height: 15, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{cart.length}</div>}
+            <button onClick={() => nav('cart')} style={{ position: 'relative', background: 'rgba(140,88,89,.08)', border: '1px solid rgba(140,88,89,.18)', borderRadius: 11, width: 40, height: 40, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexShrink: 0 }}>
+              <Icon name="cart" size={18} color="#5C3535" />
+              {cart.length > 0 && <div style={{ position: 'absolute', top: -4, left: -4, background: '#8C5859', color: '#fff', fontSize: 9, fontWeight: 800, borderRadius: '50%', width: 15, height: 15, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{cart.length}</div>}
             </button>
           </div>
         )}
         {isMobile && screen === 'group' && (
           <div className="mobile-topbar">
-            <button onClick={() => nav('catalog')} style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4, color: '#C4A990', fontFamily: 'inherit', fontWeight: 600, fontSize: 14, padding: 4 }}>
-              <Icon name="back" size={20} color="#C4A990" />חזרה
+            <button onClick={() => nav('catalog')} style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4, color: '#5C3535', fontFamily: 'inherit', fontWeight: 600, fontSize: 14, padding: 4 }}>
+              <Icon name="back" size={20} color="#5C3535" />חזרה
             </button>
-            <div style={{ flex: 1, textAlign: 'center', fontWeight: 800, fontSize: 16, color: '#F5EDE4' }}>
+            <div style={{ flex: 1, textAlign: 'center', fontWeight: 800, fontSize: 16, color: '#1E0E0E' }}>
               {PRODUCTS.find(p => p.id === GROUPS.find(g => g.id === (params.groupId || GROUPS[0].id))?.productId)?.name || ''}
             </div>
             <div style={{ width: 48 }} />

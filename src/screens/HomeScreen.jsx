@@ -21,9 +21,9 @@ export const HomeScreen = ({ onNavigate, cart, bp }) => {
                 <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#22C55E', animation: 'pulse 1.5s infinite' }} />
                 <span style={{ color: '#22C55E', fontSize: 11, fontWeight: 800, letterSpacing: 1 }}>קבוצה פעילה עכשיו</span>
               </div>
-              <div style={{ color: '#F5EDE4', fontWeight: 900, fontSize: isDesktop ? 28 : 22, lineHeight: 1.25, marginBottom: 6 }}>{hero.title}</div>
-              <div style={{ color: '#C4A990', fontSize: 13, display: 'flex', alignItems: 'center', gap: 6 }}>
-                <Icon name="map" size={13} color="#7A5F50" />{hero.location} · {hero.pickup}
+              <div style={{ color: '#1E0E0E', fontWeight: 900, fontSize: isDesktop ? 28 : 22, lineHeight: 1.25, marginBottom: 6 }}>{hero.title}</div>
+              <div style={{ color: '#5C3535', fontSize: 13, display: 'flex', alignItems: 'center', gap: 6 }}>
+                <Icon name="map" size={13} color="#8C6B5A" />{hero.location} · {hero.pickup}
               </div>
             </div>
             <CountdownTimer endsAt={hero.endsAt} />
@@ -34,11 +34,11 @@ export const HomeScreen = ({ onNavigate, cart, bp }) => {
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
             <div style={{ display: 'flex' }}>
               {hero.avatars.map((a, i) => (
-                <div key={i} style={{ width: 30, height: 30, borderRadius: '50%', background: ['#B82A12', '#F0C060', '#8B2210', '#7A4010', '#22C55E'][i % 5], display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: 11, fontWeight: 800, border: '2px solid #0D0908', marginRight: i > 0 ? -9 : 0, zIndex: 10 - i }}>{a}</div>
+                <div key={i} style={{ width: 30, height: 30, borderRadius: '50%', background: ['#6E3F40', '#C9A44A', '#8B2210', '#7A4010', '#22C55E'][i % 5], display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: 11, fontWeight: 800, border: '2px solid #EEE9D6', marginRight: i > 0 ? -9 : 0, zIndex: 10 - i }}>{a}</div>
               ))}
-              <div style={{ width: 30, height: 30, borderRadius: '50%', background: 'rgba(255,255,255,.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#C4A990', fontSize: 9, fontWeight: 700, border: '2px solid #0D0908', marginRight: -9 }}>+{hero.participants}</div>
+              <div style={{ width: 30, height: 30, borderRadius: '50%', background: 'rgba(140,88,89,.10)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#5C3535', fontSize: 9, fontWeight: 700, border: '2px solid #EEE9D6', marginRight: -9 }}>+{hero.participants}</div>
             </div>
-            <div style={{ background: '#F0C060', color: '#0D0908', fontWeight: 800, fontSize: 14, padding: '9px 22px', borderRadius: 12 }}>הצטרף עכשיו →</div>
+            <div style={{ background: '#C9A44A', color: '#EEE9D6', fontWeight: 800, fontSize: 14, padding: '9px 22px', borderRadius: 12 }}>הצטרף עכשיו →</div>
           </div>
         </div>
       </div>
@@ -47,7 +47,7 @@ export const HomeScreen = ({ onNavigate, cart, bp }) => {
         <div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14 }} className="px-mobile">
             <div className="section-title" style={{ marginBottom: 0 }}>קטלוג נתחים</div>
-            <button onClick={() => onNavigate('catalog')} style={{ background: 'none', border: 'none', color: '#E8361A', fontWeight: 700, fontSize: 13, cursor: 'pointer', fontFamily: 'inherit' }}>הצג הכל</button>
+            <button onClick={() => onNavigate('catalog')} style={{ background: 'none', border: 'none', color: '#8C5859', fontWeight: 700, fontSize: 13, cursor: 'pointer', fontFamily: 'inherit' }}>הצג הכל</button>
           </div>
           <div style={{ display: 'flex', gap: 8, overflowX: 'auto', scrollbarWidth: 'none', paddingBottom: 4, marginBottom: 16 }} className="px-mobile">
             {CATEGORIES.slice(0, 6).map(c => <Tag key={c} active={c === 'הכל'} onClick={() => onNavigate('catalog', { category: c })}>{c}</Tag>)}
@@ -66,21 +66,21 @@ export const HomeScreen = ({ onNavigate, cart, bp }) => {
               const p = PRODUCTS.find(pr => pr.id === g.productId);
               return (
                 <div key={g.id} onClick={() => onNavigate('group', { groupId: g.id })}
-                  style={{ background: '#1A100C', border: '1px solid rgba(240,192,96,.1)', borderRadius: 14, padding: 14, cursor: 'pointer', display: 'flex', gap: 12, transition: 'all .2s' }}
-                  onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(232,54,26,.35)'; e.currentTarget.style.background = '#211510'; }}
-                  onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(240,192,96,.1)'; e.currentTarget.style.background = '#1A100C'; }}
+                  style={{ background: '#EFF6D9', border: '1px solid rgba(140,88,89,.18)', borderRadius: 14, padding: 14, cursor: 'pointer', display: 'flex', gap: 12, transition: 'all .2s' }}
+                  onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(140,88,89,.45)'; e.currentTarget.style.background = '#EADDBA'; }}
+                  onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(140,88,89,.18)'; e.currentTarget.style.background = '#EFF6D9'; }}
                 >
                   <div style={{ width: 52, height: 52, borderRadius: 11, background: `linear-gradient(135deg,${p.color1},${p.color2})`, flexShrink: 0, display: 'flex', alignItems: 'flex-end', padding: 4 }}>
                     <GradeBadge grade={p.grade} size="sm" />
                   </div>
                   <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ fontWeight: 700, fontSize: 13, marginBottom: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: '#F5EDE4' }}>{g.title}</div>
-                    <div style={{ fontSize: 11, color: '#7A5F50', marginBottom: 6 }}>{g.location} · {g.pickup}</div>
+                    <div style={{ fontWeight: 700, fontSize: 13, marginBottom: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: '#1E0E0E' }}>{g.title}</div>
+                    <div style={{ fontSize: 11, color: '#8C6B5A', marginBottom: 6 }}>{g.location} · {g.pickup}</div>
                     <LiveProgressBar filled={g.filledKg} total={g.totalKg} showLabel={false} compact />
                   </div>
                   <div style={{ textAlign: 'center', flexShrink: 0 }}>
-                    <div style={{ fontWeight: 900, fontSize: 16, color: '#E8361A' }}>₪{p.priceGroup}</div>
-                    <div style={{ fontSize: 10, color: '#7A5F50' }}>לק"ג</div>
+                    <div style={{ fontWeight: 900, fontSize: 16, color: '#8C5859' }}>₪{p.priceGroup}</div>
+                    <div style={{ fontSize: 10, color: '#8C6B5A' }}>לק"ג</div>
                   </div>
                 </div>
               );

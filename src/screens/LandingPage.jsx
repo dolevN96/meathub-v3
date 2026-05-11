@@ -60,13 +60,13 @@ export const LandingPage = ({ onEnterApp }) => {
       {/* Nav */}
       <nav className={`lp-nav${scrolled ? ' scrolled' : ''}`}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <span style={{ fontWeight: 900, fontSize: 20, letterSpacing: 2, background: 'linear-gradient(135deg,#E8361A,#B82A12)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>MEATHUB</span>
+          <span onClick={onEnterApp} style={{ fontWeight: 900, fontSize: 20, letterSpacing: 2, background: 'linear-gradient(135deg,#C9A44A,#A07830)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', cursor: 'pointer' }}>MEATHUB</span>
         </div>
         <div style={{ display: 'flex', gap: 28, alignItems: 'center' }}>
           {['איך זה עובד', 'מוצרים', 'ביקורות'].map(l => (
-            <a key={l} href={`#${l}`} style={{ color: '#C4A990', fontSize: 14, fontWeight: 600, textDecoration: 'none', transition: 'color .2s' }}
-              onMouseEnter={e => e.target.style.color = '#F5EDE4'}
-              onMouseLeave={e => e.target.style.color = '#C4A990'}
+            <a key={l} href={`#${l}`} style={{ color: '#5C3535', fontSize: 14, fontWeight: 600, textDecoration: 'none', transition: 'color .2s' }}
+              onMouseEnter={e => e.target.style.color = '#1E0E0E'}
+              onMouseLeave={e => e.target.style.color = '#5C3535'}
             >{l}</a>
           ))}
           <Btn onClick={onEnterApp} size="sm" style={{ padding: '0 20px', height: 40, fontSize: 13, borderRadius: 10 }}>כניסה לאפליקציה</Btn>
@@ -79,7 +79,7 @@ export const LandingPage = ({ onEnterApp }) => {
         <div className="hero-grid" />
         <div className="hero-particles">
           {[
-            { w: 6, h: 6, top: '20%', right: '15%', bg: 'rgba(232,54,26,.4)', dur: '3.5s', delay: '.3s', op: .4 },
+            { w: 6, h: 6, top: '20%', right: '15%', bg: 'rgba(140,88,89,.45)', dur: '3.5s', delay: '.3s', op: .4 },
             { w: 10, h: 10, top: '60%', right: '80%', bg: 'rgba(240,192,96,.3)', dur: '4.5s', delay: '1s', op: .3 },
             { w: 4, h: 4, top: '35%', right: '60%', bg: 'rgba(232,54,26,.5)', dur: '3s', delay: '.7s', op: .5 },
             { w: 8, h: 8, top: '75%', right: '30%', bg: 'rgba(240,192,96,.4)', dur: '5s', delay: '1.5s', op: .35 },
@@ -92,7 +92,7 @@ export const LandingPage = ({ onEnterApp }) => {
 
         <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', maxWidth: 760 }}>
           <div className="hero-eyebrow">
-            <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#F0C060', animation: 'pulse 2s infinite' }} />
+            <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#C9A44A', animation: 'pulse 2s infinite' }} />
             <span>פלטפורמת רכישת הבשר הפרימיום מספר 1 בישראל</span>
           </div>
 
@@ -141,7 +141,7 @@ export const LandingPage = ({ onEnterApp }) => {
           { icon: 'flame', text: 'נתחים פרימיום' },
         ].map((t, i) => (
           <div key={i} className="trust-item">
-            <Icon name={t.icon} size={16} color="#E8361A" />
+            <Icon name={t.icon} size={16} color="#8C5859" />
             <span>{t.text}</span>
           </div>
         ))}
@@ -157,7 +157,7 @@ export const LandingPage = ({ onEnterApp }) => {
         <div className="features-grid">
           {features.map((f, i) => (
             <div key={i} className="feature-card" id={`feat-${i}`} data-animate style={{ ...animStyle(`feat-${i}`), transitionDelay: `${i * 0.08}s` }}>
-              <div className="feature-icon"><Icon name={f.icon} size={22} color="#E8361A" /></div>
+              <div className="feature-icon"><Icon name={f.icon} size={22} color="#8C5859" /></div>
               <div className="feature-title">{f.title}</div>
               <div className="feature-desc">{f.desc}</div>
             </div>
@@ -166,7 +166,7 @@ export const LandingPage = ({ onEnterApp }) => {
       </section>
 
       {/* How it works */}
-      <section style={{ padding: '80px 24px', background: 'rgba(255,255,255,.02)', borderTop: '1px solid rgba(240,192,96,.08)', borderBottom: '1px solid rgba(240,192,96,.08)' }}>
+      <section style={{ padding: '80px 24px', background: 'rgba(255,255,255,.02)', borderTop: '1px solid rgba(140,88,89,.12)', borderBottom: '1px solid rgba(140,88,89,.12)' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }} id="איך זה עובד">
           <div style={{ textAlign: 'center', marginBottom: 0 }} id="steps-header" data-animate>
             <div className="section-eyebrow">התהליך</div>
@@ -218,7 +218,7 @@ export const LandingPage = ({ onEnterApp }) => {
                         <span className="price-now">₪{p.priceGroup}</span>
                         <span className="price-was">₪{p.priceRetail}</span>
                       </div>
-                      <div style={{ fontSize: 11, color: '#7A5F50' }}>לק"ג</div>
+                      <div style={{ fontSize: 11, color: '#8C6B5A' }}>לק"ג</div>
                     </div>
                     <span className="saving-pill">-{saving}%</span>
                   </div>
@@ -242,7 +242,7 @@ export const LandingPage = ({ onEnterApp }) => {
           {testimonials.map((t, i) => (
             <div key={i} className="testimonial-card" id={`test-${i}`} data-animate style={{ ...animStyle(`test-${i}`), transitionDelay: `${i * .12}s` }}>
               <div className="stars">
-                {Array(t.rating).fill(0).map((_, j) => <Icon key={j} name="star" size={14} color="#F0C060" />)}
+                {Array(t.rating).fill(0).map((_, j) => <Icon key={j} name="star" size={14} color="#C9A44A" />)}
               </div>
               <div className="testimonial-text">"{t.text}"</div>
               <div className="testimonial-author">
@@ -261,8 +261,8 @@ export const LandingPage = ({ onEnterApp }) => {
       <div className="cta-section">
         <div style={{ position: 'relative', zIndex: 1 }}>
           <div className="section-eyebrow" style={{ display: 'block', textAlign: 'center', marginBottom: 16 }}>מוכן להתחיל?</div>
-          <h2 style={{ fontSize: 'clamp(32px,5vw,56px)', fontWeight: 900, color: '#F5EDE4', marginBottom: 16, letterSpacing: '-1px' }}>הצטרף ל-12,000 חוסכים</h2>
-          <p style={{ fontSize: 18, color: '#C4A990', marginBottom: 40, maxWidth: 440, margin: '0 auto 40px' }}>ההרשמה חינמית לחלוטין. הצטרף עכשיו וחסוך בהזמנה הראשונה.</p>
+          <h2 style={{ fontSize: 'clamp(32px,5vw,56px)', fontWeight: 900, color: '#1E0E0E', marginBottom: 16, letterSpacing: '-1px' }}>הצטרף ל-12,000 חוסכים</h2>
+          <p style={{ fontSize: 18, color: '#5C3535', marginBottom: 40, maxWidth: 440, margin: '0 auto 40px' }}>ההרשמה חינמית לחלוטין. הצטרף עכשיו וחסוך בהזמנה הראשונה.</p>
           <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
             <Btn onClick={onEnterApp} size="lg" style={{ padding: '0 40px', fontSize: 16 }}>הצטרף עכשיו — חינם</Btn>
             <Btn onClick={onEnterApp} variant="ghost" size="lg" style={{ padding: '0 28px', fontSize: 15 }}>גלה קבוצות פעילות</Btn>
@@ -271,17 +271,17 @@ export const LandingPage = ({ onEnterApp }) => {
       </div>
 
       {/* Footer */}
-      <footer style={{ borderTop: '1px solid rgba(240,192,96,.08)', padding: '32px 24px' }}>
+      <footer style={{ borderTop: '1px solid rgba(140,88,89,.12)', padding: '32px 24px' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 20 }}>
           <div>
-            <div style={{ fontWeight: 900, fontSize: 18, letterSpacing: 2, background: 'linear-gradient(135deg,#E8361A,#B82A12)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', marginBottom: 4 }}>MEATHUB</div>
-            <div style={{ fontSize: 12, color: '#7A5F50' }}>© 2025 MeatHub. כל הזכויות שמורות.</div>
+            <div style={{ fontWeight: 900, fontSize: 18, letterSpacing: 2, background: 'linear-gradient(135deg,#C9A44A,#A07830)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', marginBottom: 4 }}>MEATHUB</div>
+            <div style={{ fontSize: 12, color: '#8C6B5A' }}>© 2025 MeatHub. כל הזכויות שמורות.</div>
           </div>
           <div style={{ display: 'flex', gap: 24 }}>
             {['תנאי שימוש', 'פרטיות', 'צור קשר'].map(l => (
-              <a key={l} href="#" onClick={e => e.preventDefault()} style={{ fontSize: 13, color: '#7A5F50', textDecoration: 'none', transition: 'color .2s' }}
-                onMouseEnter={e => e.target.style.color = '#C4A990'}
-                onMouseLeave={e => e.target.style.color = '#7A5F50'}
+              <a key={l} href="#" onClick={e => e.preventDefault()} style={{ fontSize: 13, color: '#8C6B5A', textDecoration: 'none', transition: 'color .2s' }}
+                onMouseEnter={e => e.target.style.color = '#5C3535'}
+                onMouseLeave={e => e.target.style.color = '#8C6B5A'}
               >{l}</a>
             ))}
           </div>

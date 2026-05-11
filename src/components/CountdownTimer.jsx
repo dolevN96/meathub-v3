@@ -19,9 +19,9 @@ export const CountdownTimer = ({ endsAt, style: s = {} }) => {
   }, [endsAt]);
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'rgba(240,192,96,.1)', border: '1px solid rgba(240,192,96,.25)', borderRadius: 999, padding: '5px 12px', ...s }}>
-      <Icon name="clock" size={13} color="#F0C060" />
-      <span style={{ color: '#F0C060', fontWeight: 800, fontSize: 13, letterSpacing: 1, fontVariantNumeric: 'tabular-nums' }}>{time}</span>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'rgba(140,88,89,.18)', border: '1px solid rgba(240,192,96,.25)', borderRadius: 999, padding: '5px 12px', ...s }}>
+      <Icon name="clock" size={13} color="#C9A44A" />
+      <span style={{ color: '#C9A44A', fontWeight: 800, fontSize: 13, letterSpacing: 1, fontVariantNumeric: 'tabular-nums' }}>{time}</span>
     </div>
   );
 };
