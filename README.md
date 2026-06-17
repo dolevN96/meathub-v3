@@ -14,6 +14,9 @@
 
 </div>
 
+- 🔗 פרויקט חי: https://meathub-v3.vercel.app
+- 💻 קוד המקור: https://github.com/dolevN96/meathub-v3
+
 ---
 
 ## 📋 סקירה כללית
@@ -44,7 +47,13 @@ MeatHub מאפשרת לקבוצות צרכנים להזמין יחד נתחי ב
 
 ## 📸 צילומי מסך
 
-> _להוסיף צילומי מסך מהאפליקציה (קטלוג, עמוד קבוצה, עגלה, תשלום) בתיקיית `screenshots/` ולקשר אליהם כאן._
+| דף הבית | קטלוג + סינון | עמוד קבוצה |
+|---|---|---|
+| ![HomePage](screenshots/HomePage.png) | ![ProductListsFilters](screenshots/ProductListsFilters.png) | ![GPage](screenshots/GPage.png) |
+
+| כניסה / הרשמה | עגלה | פרופיל |
+|---|---|---|
+| ![LoginPage](screenshots/LoginPage.png) | ![CartPage](screenshots/CartPage.png) | ![ProfilePage](screenshots/ProfilePage.png) |
 
 ## 🛠 טכנולוגיות
 
@@ -69,137 +78,6 @@ MeatHub מאפשרת לקבוצות צרכנים להזמין יחד נתחי ב
 ![ERD](screenshots/erd.png)
 
 9 טבלאות: `profiles`, `importers`, `products`, `branches`, `groups`, `group_products`, `group_participants`, `orders`, `order_items`. מקור הסכמה המלא (כולל RLS ו-RPC): [`supabase/schema_v4.sql`](supabase/schema_v4.sql).
-
-<details>
-<summary>📜 קוד DBML — להדבקה ב-<a href="https://dbdiagram.io">dbdiagram.io</a> ליצירת/ייצוא התרשים</summary>
-
-```dbml
-// auth.users מנוהל ע"י Supabase Auth ולא חלק מהסכמה שלנו — מופיע כאן רק כדי
-// שהתרשים יראה את הקשר האמיתי בין profiles / orders / group_participants למשתמש המחובר.
-Table auth_users {
-  id uuid [pk, note: 'Supabase-managed (auth.users)']
-  email text
-}
-
-Table profiles {
-  id uuid [pk, ref: - auth_users.id]
-  name text
-  email text
-  phone text
-  city text
-  created_at timestamptz
-}
-
-Table importers {
-  id uuid [pk]
-  slug text [unique, not null]
-  name text [not null]
-  name_en text
-  origin text
-  origin_en text
-  rating numeric
-  reviews int
-  verified boolean
-  logo text
-  image_url text
-  address text
-  company_id text
-  contact_info text
-}
-
-Table products {
-  id uuid [pk]
-  slug text [unique, not null]
-  name text [not null]
-  name_en text
-  importer_id uuid [ref: > importers.id]
-  grade text
-  grade_label text
-  cut_number int
-  producer text
-  origin_country text
-  marbling_score text
-  price_retail numeric
-  price_group numeric
-  weight numeric
-  unit text
-  category text
-  category_en text
-  description text
-}
-
-Table branches {
-  id uuid [pk]
-  name text [not null]
-  address text [not null]
-  city text [not null]
-  region text [not null]
-  phone text
-  lat numeric
-  lng numeric
-  opening_hours text
-  notes text
-}
-
-Table groups {
-  id uuid [pk]
-  slug text [unique, not null]
-  title text [not null]
-  title_en text
-  branch_id uuid [ref: > branches.id]
-  ends_at timestamptz
-  status text [note: 'active | closed | cancelled']
-}
-
-Table group_products {
-  id uuid [pk]
-  group_id uuid [ref: > groups.id]
-  product_id uuid [ref: > products.id]
-  target_kg numeric
-  filled_kg numeric
-
-  indexes {
-    (group_id, product_id) [unique]
-  }
-}
-
-Table group_participants {
-  id uuid [pk]
-  group_id uuid [ref: > groups.id]
-  product_id uuid [ref: > products.id]
-  user_id uuid [ref: > auth_users.id]
-  kg_ordered numeric
-  created_at timestamptz
-
-  indexes {
-    (group_id, user_id, product_id) [unique]
-  }
-}
-
-Table orders {
-  id uuid [pk]
-  user_id uuid [ref: > auth_users.id]
-  status text [default: 'pending']
-  total_amount numeric
-  pickup_code text
-  payment_reference text
-  created_at timestamptz
-}
-
-Table order_items {
-  id uuid [pk]
-  order_id uuid [ref: > orders.id]
-  group_id uuid [ref: > groups.id]
-  product_id uuid [ref: > products.id]
-  kg numeric
-  price_per_kg numeric
-  total numeric
-}
-```
-
-**הוראות:** [dbdiagram.io](https://dbdiagram.io) → New Diagram → מחקו את התוכן הקיים → הדביקו את הקוד מעלה → **Export → Export to PNG** → שמרו כ-`screenshots/erd.png`.
-
-</details>
 
 ## 📁 מבנה הפרויקט
 
