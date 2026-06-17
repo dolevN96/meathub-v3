@@ -10,11 +10,9 @@
 ![TanStack Query](https://img.shields.io/badge/TanStack%20Query-5-FF4154?logo=reactquery&logoColor=white&style=flat-square)
 ![RTL](https://img.shields.io/badge/RTL-עברית-8B1A1A?style=flat-square)
 
-### 🔗 [פרויקט חי](#) &nbsp;·&nbsp; 💻 [קוד המקור](#) &nbsp;·&nbsp; 🗂 [ERD](#-מבנה-הנתונים--erd)
+### 🔗 [פרויקט חי](https://meathub-v3.vercel.app) &nbsp;·&nbsp; 💻 [קוד המקור](https://github.com/dolevN96/meathub-v3) &nbsp;·&nbsp; 🗂 [ERD](#-מבנה-הנתונים--erd)
 
 </div>
-
-> ⚠️ **TODO לפני הגשה:** להחליף את שני הקישורים למעלה ב-URL האמיתי של Vercel וה-GitHub repo.
 
 ---
 
@@ -260,7 +258,7 @@ npx vercel --prod
 - [x] רשימת שירותים חיצוניים מפורטת
 - [x] `.env` לא מועלה לריפו (מאומת ב-`.gitignore` + היסטוריית git)
 - [x] לא נדרש משתמש דמו — הרשמה אמיתית
-- [ ] קישור Vercel חי (להוסיף לאחר דיפלוי)
+- [x] קישור Vercel חי — https://meathub-v3.vercel.app
 - [ ] ריפו GitHub ציבורי (לוודא visibility)
 - [ ] צילומי מסך + ERD PNG בתיקיית `screenshots/`
 
