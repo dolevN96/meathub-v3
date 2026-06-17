@@ -12,3 +12,6 @@ stitch_
 temp_skill
 ui-ux-pro-max-skill-main
 CLAUDE.md
+
+.vercel
+.env*
