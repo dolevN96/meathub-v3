@@ -1,5 +1,17 @@
 node_modules
-dist
 .env
 .env.local
 *.local
+dist
+
+# unrelated tooling — not part of the MeatHub app
+.claude-plugin
+.vscode
+skill.json
+stitch_
+temp_skill
+ui-ux-pro-max-skill-main
+CLAUDE.md
+
+.vercel
+.env*

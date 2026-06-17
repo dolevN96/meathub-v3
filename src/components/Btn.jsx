@@ -4,23 +4,22 @@ export const Btn = ({ children, onClick, disabled, full, size = 'md', variant = 
   const [hov, setHov] = useState(false);
   const [act, setAct] = useState(false);
   const h = { sm: 38, md: 52, lg: 56 }[size];
+
   const styles = {
     primary: {
-      background: disabled ? '#3A2520' : hov ? '#B82A12' : '#E8361A',
-      color: disabled ? '#6A4040' : '#fff',
-      boxShadow: disabled ? 'none' : hov ? '0 6px 28px rgba(232,54,26,.5)' : '0 4px 20px rgba(232,54,26,.35)',
+      background: disabled ? '#C4B0AA' : hov ? '#6B1212' : '#8B1A1A',
+      color: disabled ? '#FFFFFF' : '#FFFFFF',
+      border: 'none',
     },
     secondary: {
-      background: hov ? 'rgba(240,192,96,.15)' : 'rgba(240,192,96,.08)',
-      color: '#F0C060',
-      boxShadow: 'none',
-      border: '1px solid rgba(240,192,96,.3)',
+      background: 'transparent',
+      color: '#4A3728',
+      border: '1px solid rgba(10,7,5,.20)',
     },
     ghost: {
-      background: hov ? 'rgba(255,255,255,.08)' : 'transparent',
-      color: '#C4A990',
-      boxShadow: 'none',
-      border: '1px solid rgba(255,255,255,.12)',
+      background: 'transparent',
+      color: hov ? '#6B1212' : '#8B1A1A',
+      border: '1px solid #8B1A1A',
     },
   }[variant] || {};
 
@@ -34,17 +33,16 @@ export const Btn = ({ children, onClick, disabled, full, size = 'md', variant = 
       onMouseUp={() => setAct(false)}
       style={{
         ...styles,
-        border: styles.border || 'none',
-        borderRadius: 14,
+        borderRadius: 2,
         height: h,
         padding: '0 24px',
         fontFamily: 'inherit',
-        fontWeight: 800,
+        fontWeight: 600,
         fontSize: size === 'sm' ? 13 : 15,
         cursor: disabled ? 'not-allowed' : 'pointer',
         width: full ? '100%' : 'auto',
-        transition: 'all .18s cubic-bezier(0.23,1,0.32,1)',
-        transform: act ? 'scale(0.97)' : 'none',
+        transition: 'background 150ms ease, opacity 150ms ease, transform 120ms cubic-bezier(0.34, 1.56, 0.64, 1)',
+        transform: act ? 'scale(0.96)' : 'none',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

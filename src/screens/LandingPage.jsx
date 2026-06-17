@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
-import { PRODUCTS, IMPORTERS, GROUPS } from '../data';
 import { Icon } from '../components/Icon';
 import { Btn } from '../components/Btn';
-import { GradeBadge } from '../components/GradeBadge';
 
-export const LandingPage = ({ onEnterApp }) => {
+export const LandingPage = ({ onEnterApp, onGoToCatalog, onNavigate, cartCount = 0, user }) => {
   const [scrolled, setScrolled] = useState(false);
   const [visibleSections, setVisibleSections] = useState({});
+  const [openFaq, setOpenFaq] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 60);
@@ -43,6 +42,13 @@ export const LandingPage = ({ onEnterApp }) => {
     { num: 4, title: 'אוסף ונהנה', desc: 'הגע לנקודת האיסוף, קח את ההזמנה ותהנה!' },
   ];
 
+  const faqs = [
+    { q: 'איך התשלום עובד?', a: 'אתם מצטרפים לקבוצה בלי לשלם מראש. החיוב מתבצע רק כשהקבוצה נסגרת ומגיעה למספר המשתתפים הנדרש — אם הקבוצה לא נסגרת, אתם לא משלמים כלום.' },
+    { q: 'מה קורה אם קבוצה לא נסגרת?', a: 'ההזמנה שלכם מבוטלת אוטומטית וללא כל חיוב. תמיד אפשר להצטרף לקבוצה אחרת לאותו נתח או להמשיך לעקוב עד שתיפתח קבוצה חדשה.' },
+    { q: 'איפה אוספים את ההזמנה?', a: 'בכל רחבי הארץ יש נקודות איסוף מתואמות מראש. לאחר סגירת הקבוצה תקבלו הודעה עם מיקום ושעת איסוף מדויקים.' },
+    { q: 'איך אתם שומרים על איכות הבשר?', a: 'כל ספק עובר תהליך סינון קפדני, וכל נתח מגיע עם תיעוד מקור, דירוג שומן (BMS) ותעודת איכות — בלי הפתעות.' },
+  ];
+
   const testimonials = [
     { name: 'דוד כהן', city: 'תל אביב', text: 'שיניתי לגמרי את הדרך שאני קונה בשר. חסכתי כמעט 800 שקל בחודש ומקבל בשר הרבה יותר טוב!', rating: 5 },
     { name: 'שרה לוי', city: 'ירושלים', text: 'הייתי סקפטית בהתחלה, אבל אחרי ההזמנה הראשונה הפכתי לממנה קבועה. האיכות פשוט מדהימה.', rating: 5 },
@@ -60,46 +66,52 @@ export const LandingPage = ({ onEnterApp }) => {
       {/* Nav */}
       <nav className={`lp-nav${scrolled ? ' scrolled' : ''}`}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <span style={{ fontWeight: 900, fontSize: 20, letterSpacing: 2, background: 'linear-gradient(135deg,#E8361A,#B82A12)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>MEATHUB</span>
+          <span onClick={onEnterApp} style={{ fontWeight: 900, fontSize: 20, letterSpacing: 2, color: '#8B1A1A', cursor: 'pointer' }}>MEATHUB</span>
         </div>
         <div style={{ display: 'flex', gap: 28, alignItems: 'center' }}>
-          {['איך זה עובד', 'מוצרים', 'ביקורות'].map(l => (
-            <a key={l} href={`#${l}`} style={{ color: '#C4A990', fontSize: 14, fontWeight: 600, textDecoration: 'none', transition: 'color .2s' }}
-              onMouseEnter={e => e.target.style.color = '#F5EDE4'}
-              onMouseLeave={e => e.target.style.color = '#C4A990'}
+          {['איך זה עובד', 'ביקורות'].map(l => (
+            <a key={l} href={`#${l}`} style={{ color: '#5C3535', fontSize: 14, fontWeight: 600, textDecoration: 'none', transition: 'color .2s' }}
+              onMouseEnter={e => e.target.style.color = '#1E0E0E'}
+              onMouseLeave={e => e.target.style.color = '#5C3535'}
             >{l}</a>
           ))}
-          <Btn onClick={onEnterApp} size="sm" style={{ padding: '0 20px', height: 40, fontSize: 13, borderRadius: 10 }}>כניסה לאפליקציה</Btn>
+          <button
+            onClick={onGoToCatalog}
+            style={{ color: '#5C3535', fontSize: 14, fontWeight: 600, background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontFamily: 'Heebo, sans-serif', transition: 'color .2s' }}
+            onMouseEnter={e => e.target.style.color = '#1E0E0E'}
+            onMouseLeave={e => e.target.style.color = '#5C3535'}
+          >מוצרים</button>
+        </div>
+        <div className="topbar-actions">
+          <button
+            onClick={() => onNavigate ? onNavigate('cart') : onEnterApp()}
+            style={{ position: 'relative', background: 'transparent', border: '1px solid rgba(10,7,5,.14)', borderRadius: 2, width: 40, height: 40, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', transition: 'border-color 150ms ease' }}
+          >
+            <Icon name="cart" size={18} color="#0A0705" />
+            {cartCount > 0 && <div style={{ position: 'absolute', top: -6, insetInlineStart: -6, background: '#8B1A1A', color: '#fff', fontSize: 9, fontWeight: 800, borderRadius: '50%', width: 17, height: 17, display: 'flex', alignItems: 'center', justifyContent: 'center', border: '2px solid #FFFFFF' }}>{cartCount}</div>}
+          </button>
+          {user ? (
+            <div onClick={() => onNavigate ? onNavigate('profile') : onEnterApp()} style={{ width: 40, height: 40, borderRadius: 0, background: '#0A0705', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 800, fontSize: 15, cursor: 'pointer' }}>{user.name?.charAt(0) || 'מ'}</div>
+          ) : (
+            <Btn onClick={() => onNavigate ? onNavigate('login') : onEnterApp()} size="sm" style={{ height: 38, padding: '0 16px', fontSize: 13 }}>כניסה</Btn>
+          )}
         </div>
       </nav>
 
       {/* Hero */}
       <section className="hero-section">
         <div className="hero-bg" />
-        <div className="hero-grid" />
-        <div className="hero-particles">
-          {[
-            { w: 6, h: 6, top: '20%', right: '15%', bg: 'rgba(232,54,26,.4)', dur: '3.5s', delay: '.3s', op: .4 },
-            { w: 10, h: 10, top: '60%', right: '80%', bg: 'rgba(240,192,96,.3)', dur: '4.5s', delay: '1s', op: .3 },
-            { w: 4, h: 4, top: '35%', right: '60%', bg: 'rgba(232,54,26,.5)', dur: '3s', delay: '.7s', op: .5 },
-            { w: 8, h: 8, top: '75%', right: '30%', bg: 'rgba(240,192,96,.4)', dur: '5s', delay: '1.5s', op: .35 },
-            { w: 5, h: 5, top: '15%', right: '45%', bg: 'rgba(232,54,26,.3)', dur: '4s', delay: '2s', op: .3 },
-            { w: 12, h: 12, top: '50%', right: '88%', bg: 'rgba(240,192,96,.2)', dur: '6s', delay: '.5s', op: .2 },
-          ].map((p, i) => (
-            <div key={i} className="particle" style={{ width: p.w, height: p.h, top: p.top, right: p.right, background: p.bg, '--dur': p.dur, '--delay': p.delay, '--op': p.op, borderRadius: '50%' }} />
-          ))}
-        </div>
 
         <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', maxWidth: 760 }}>
           <div className="hero-eyebrow">
-            <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#F0C060', animation: 'pulse 2s infinite' }} />
+            <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#C9A44A', animation: 'pulse 2s infinite' }} />
             <span>פלטפורמת רכישת הבשר הפרימיום מספר 1 בישראל</span>
           </div>
 
           <h1 className="hero-title">
             <span className="accent">בשר פרימיום</span><br />
             ישר מהיבואן<br />
-            <span className="gold-accent">חיסכון 40–60%</span>
+            <span className="accent">חיסכון 40–60%</span>
           </h1>
 
           <p className="hero-sub">
@@ -107,11 +119,11 @@ export const LandingPage = ({ onEnterApp }) => {
           </p>
 
           <div className="hero-cta-group">
-            <Btn onClick={onEnterApp} size="lg" style={{ padding: '0 36px', fontSize: 16, borderRadius: 14 }}>
+            <Btn onClick={onEnterApp} size="lg" style={{ padding: '0 36px', fontSize: 16, borderRadius: 2 }}>
               התחל לחסוך עכשיו
-              <Icon name="arrowLeft" size={18} color="#fff" style={{ transform: 'rotate(180deg)' }} />
+              <Icon name="arrowLeft" size={18} color="#fff" />
             </Btn>
-            <Btn onClick={onEnterApp} variant="ghost" size="lg" style={{ padding: '0 28px', fontSize: 15, borderRadius: 14 }}>
+            <Btn onClick={onEnterApp} variant="ghost" size="lg" style={{ padding: '0 28px', fontSize: 15, borderRadius: 2 }}>
               ראה קבוצות פעילות
             </Btn>
           </div>
@@ -141,7 +153,7 @@ export const LandingPage = ({ onEnterApp }) => {
           { icon: 'flame', text: 'נתחים פרימיום' },
         ].map((t, i) => (
           <div key={i} className="trust-item">
-            <Icon name={t.icon} size={16} color="#E8361A" />
+            <Icon name={t.icon} size={16} color="#8C5859" />
             <span>{t.text}</span>
           </div>
         ))}
@@ -157,7 +169,7 @@ export const LandingPage = ({ onEnterApp }) => {
         <div className="features-grid">
           {features.map((f, i) => (
             <div key={i} className="feature-card" id={`feat-${i}`} data-animate style={{ ...animStyle(`feat-${i}`), transitionDelay: `${i * 0.08}s` }}>
-              <div className="feature-icon"><Icon name={f.icon} size={22} color="#E8361A" /></div>
+              <div className="feature-icon"><Icon name={f.icon} size={22} color="#8C5859" /></div>
               <div className="feature-title">{f.title}</div>
               <div className="feature-desc">{f.desc}</div>
             </div>
@@ -166,7 +178,7 @@ export const LandingPage = ({ onEnterApp }) => {
       </section>
 
       {/* How it works */}
-      <section style={{ padding: '80px 24px', background: 'rgba(255,255,255,.02)', borderTop: '1px solid rgba(240,192,96,.08)', borderBottom: '1px solid rgba(240,192,96,.08)' }}>
+      <section style={{ padding: '80px 24px', background: 'rgba(255,255,255,.02)', borderTop: '1px solid rgba(140,88,89,.12)', borderBottom: '1px solid rgba(140,88,89,.12)' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }} id="איך זה עובד">
           <div style={{ textAlign: 'center', marginBottom: 0 }} id="steps-header" data-animate>
             <div className="section-eyebrow">התהליך</div>
@@ -184,51 +196,30 @@ export const LandingPage = ({ onEnterApp }) => {
         </div>
       </section>
 
-      {/* Products */}
-      <section className="lp-section" id="מוצרים">
-        <div id="prod-header" data-animate style={animStyle('prod-header')}>
-          <div className="section-eyebrow">הקטלוג שלנו</div>
-          <h2 className="section-heading">נתחים שתחלמו עליהם</h2>
-          <p className="section-desc">מאנטריקוט אורוגוואי ועד פילה Black Angus — הכל במחיר שתאמינו לו</p>
+      {/* FAQ */}
+      <section className="lp-section" id="שאלות נפוצות">
+        <div id="faq-header" data-animate style={{ ...animStyle('faq-header'), maxWidth: 700, margin: '0 auto' }}>
+          <div className="section-eyebrow">שאלות נפוצות</div>
+          <h2 className="section-heading">כל מה שצריך לדעת</h2>
         </div>
-        <div className="showcase-grid">
-          {PRODUCTS.slice(0, 6).map((p, i) => {
-            const saving = Math.round((1 - p.priceGroup / p.priceRetail) * 100);
-            const imp = IMPORTERS.find(im => im.id === p.importer);
-            const hasGroup = GROUPS.some(g => g.productId === p.id && g.status === 'active');
+        <div id="faq-list" data-animate style={{ ...animStyle('faq-list'), maxWidth: 700, margin: '32px auto 0' }}>
+          {faqs.map((f, i) => {
+            const open = openFaq === i;
             return (
-              <div key={p.id} className="showcase-card" id={`prod-${i}`} data-animate style={{ ...animStyle(`prod-${i}`), transitionDelay: `${i * .1}s` }} onClick={onEnterApp}>
-                <div className="showcase-img" style={{ background: `linear-gradient(135deg,${p.color1},${p.color2})` }}>
-                  <div style={{ position: 'relative', zIndex: 1, display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', width: '100%' }}>
-                    <GradeBadge grade={p.grade} />
-                    {hasGroup && (
-                      <div className="live-badge">
-                        <div style={{ width: 5, height: 5, borderRadius: '50%', background: '#22C55E', animation: 'pulse 1.5s infinite' }} />
-                        LIVE
-                      </div>
-                    )}
-                  </div>
-                </div>
-                <div className="showcase-info">
-                  <div className="showcase-name">{p.name}</div>
-                  <div className="showcase-origin">{imp?.name} · {imp?.origin}</div>
-                  <div className="showcase-price-row">
-                    <div>
-                      <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
-                        <span className="price-now">₪{p.priceGroup}</span>
-                        <span className="price-was">₪{p.priceRetail}</span>
-                      </div>
-                      <div style={{ fontSize: 11, color: '#7A5F50' }}>לק"ג</div>
-                    </div>
-                    <span className="saving-pill">-{saving}%</span>
-                  </div>
+              <div key={i} style={{ borderBottom: '1px solid rgba(140,88,89,.14)' }}>
+                <button
+                  onClick={() => setOpenFaq(open ? -1 : i)}
+                  style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, background: 'none', border: 'none', cursor: 'pointer', padding: '20px 0', textAlign: 'inherit', fontFamily: 'inherit' }}
+                >
+                  <span style={{ fontSize: 16, fontWeight: 700, color: '#1E0E0E' }}>{f.q}</span>
+                  <Icon name="chevronD" size={18} color="#8B1A1A" style={{ transform: open ? 'rotate(180deg)' : 'none', transition: 'transform 200ms ease', flexShrink: 0 }} />
+                </button>
+                <div style={{ maxHeight: open ? 200 : 0, overflow: 'hidden', transition: 'max-height 250ms cubic-bezier(0.23,1,0.32,1)' }}>
+                  <p style={{ margin: '0 0 20px', fontSize: 14.5, lineHeight: 1.7, color: '#5C3535' }}>{f.a}</p>
                 </div>
               </div>
             );
           })}
-        </div>
-        <div style={{ textAlign: 'center', marginTop: 36 }}>
-          <Btn onClick={onEnterApp} variant="secondary" size="lg" style={{ padding: '0 36px', fontSize: 15 }}>ראה את כל הנתחים ←</Btn>
         </div>
       </section>
 
@@ -242,7 +233,7 @@ export const LandingPage = ({ onEnterApp }) => {
           {testimonials.map((t, i) => (
             <div key={i} className="testimonial-card" id={`test-${i}`} data-animate style={{ ...animStyle(`test-${i}`), transitionDelay: `${i * .12}s` }}>
               <div className="stars">
-                {Array(t.rating).fill(0).map((_, j) => <Icon key={j} name="star" size={14} color="#F0C060" />)}
+                {Array(t.rating).fill(0).map((_, j) => <Icon key={j} name="star" size={14} color="#C9A44A" />)}
               </div>
               <div className="testimonial-text">"{t.text}"</div>
               <div className="testimonial-author">
@@ -261,27 +252,27 @@ export const LandingPage = ({ onEnterApp }) => {
       <div className="cta-section">
         <div style={{ position: 'relative', zIndex: 1 }}>
           <div className="section-eyebrow" style={{ display: 'block', textAlign: 'center', marginBottom: 16 }}>מוכן להתחיל?</div>
-          <h2 style={{ fontSize: 'clamp(32px,5vw,56px)', fontWeight: 900, color: '#F5EDE4', marginBottom: 16, letterSpacing: '-1px' }}>הצטרף ל-12,000 חוסכים</h2>
-          <p style={{ fontSize: 18, color: '#C4A990', marginBottom: 40, maxWidth: 440, margin: '0 auto 40px' }}>ההרשמה חינמית לחלוטין. הצטרף עכשיו וחסוך בהזמנה הראשונה.</p>
+          <h2 style={{ fontSize: 'clamp(32px,5vw,56px)', fontWeight: 900, color: '#1E0E0E', marginBottom: 16, letterSpacing: '-1px' }}>הצטרף ל-12,000 חוסכים</h2>
+          <p style={{ fontSize: 18, color: '#5C3535', marginBottom: 40, maxWidth: 440, margin: '0 auto 40px' }}>ההרשמה חינמית לחלוטין. הצטרף עכשיו וחסוך בהזמנה הראשונה.</p>
           <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Btn onClick={onEnterApp} size="lg" style={{ padding: '0 40px', fontSize: 16 }}>הצטרף עכשיו — חינם</Btn>
+            <Btn onClick={() => onNavigate ? onNavigate('login', { mode: 'register' }) : onEnterApp()} size="lg" style={{ padding: '0 40px', fontSize: 16 }}>הצטרף עכשיו — חינם</Btn>
             <Btn onClick={onEnterApp} variant="ghost" size="lg" style={{ padding: '0 28px', fontSize: 15 }}>גלה קבוצות פעילות</Btn>
           </div>
         </div>
       </div>
 
       {/* Footer */}
-      <footer style={{ borderTop: '1px solid rgba(240,192,96,.08)', padding: '32px 24px' }}>
+      <footer style={{ borderTop: '1px solid rgba(140,88,89,.12)', padding: '32px 24px' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 20 }}>
           <div>
-            <div style={{ fontWeight: 900, fontSize: 18, letterSpacing: 2, background: 'linear-gradient(135deg,#E8361A,#B82A12)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', marginBottom: 4 }}>MEATHUB</div>
-            <div style={{ fontSize: 12, color: '#7A5F50' }}>© 2025 MeatHub. כל הזכויות שמורות.</div>
+            <div style={{ fontWeight: 900, fontSize: 18, letterSpacing: 2, color: '#8B1A1A', marginBottom: 4 }}>MEATHUB</div>
+            <div style={{ fontSize: 12, color: '#8C6B5A' }}>© 2025 MeatHub. כל הזכויות שמורות.</div>
           </div>
           <div style={{ display: 'flex', gap: 24 }}>
             {['תנאי שימוש', 'פרטיות', 'צור קשר'].map(l => (
-              <a key={l} href="#" onClick={e => e.preventDefault()} style={{ fontSize: 13, color: '#7A5F50', textDecoration: 'none', transition: 'color .2s' }}
-                onMouseEnter={e => e.target.style.color = '#C4A990'}
-                onMouseLeave={e => e.target.style.color = '#7A5F50'}
+              <a key={l} href="#" onClick={e => e.preventDefault()} style={{ fontSize: 13, color: '#8C6B5A', textDecoration: 'none', transition: 'color .2s' }}
+                onMouseEnter={e => e.target.style.color = '#5C3535'}
+                onMouseLeave={e => e.target.style.color = '#8C6B5A'}
               >{l}</a>
             ))}
           </div>
