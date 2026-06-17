@@ -67,7 +67,6 @@ MeatHub מאפשרת לקבוצות צרכנים להזמין יחד נתחי ב
 ## 🗂 מבנה הנתונים — ERD
 
 ![ERD](screenshots/erd.png)
-<!-- TODO: ייצאו PNG מ-dbdiagram.io (ראו הוראות מטה) ושמרו בנתיב screenshots/erd.png -->
 
 9 טבלאות: `profiles`, `importers`, `products`, `branches`, `groups`, `group_products`, `group_participants`, `orders`, `order_items`. מקור הסכמה המלא (כולל RLS ו-RPC): [`supabase/schema_v4.sql`](supabase/schema_v4.sql).
 
@@ -217,49 +216,3 @@ supabase/
 ├── schema_v5_live_demo.sql  תיקון trigger הרשמה + רענון אוטומטי של קבוצות (pg_cron)
 └── seed_v4.sql               נתוני דמו (יבואנים, סניפים, מוצרים, קבוצות)
 ```
-
-## 🚀 התקנה והרצה
-
-1. צרו פרויקט ב-[Supabase](https://supabase.com), והריצו לפי הסדר ב-SQL Editor:
-   `supabase/schema_v4.sql` → `supabase/seed_v4.sql` → `supabase/schema_v5_live_demo.sql`
-2. צרו קובץ `.env` בשורש הפרויקט (**לא** מועלה ל-git):
-   ```
-   VITE_SUPABASE_URL=https://YOUR_PROJECT.supabase.co
-   VITE_SUPABASE_ANON_KEY=YOUR_ANON_KEY
-   ```
-3. הרצה:
-   ```bash
-   npm install
-   npm run dev
-   ```
-
-## 📦 בנייה לפרודקשן / דיפלוימנט
-
-```bash
-npm run build
-```
-
-מפיק `dist/index.html` בודד (כל ה-JS/CSS inline). דיפלוימנט ל-Vercel:
-
-```bash
-npx vercel login
-npx vercel --prod
-```
-
-יש להגדיר את `VITE_SUPABASE_URL` ו-`VITE_SUPABASE_ANON_KEY` ב-**Vercel → Settings → Environment Variables** — הן נדרשות בזמן ה-build, לא רק בזמן ריצה.
-
----
-
-<details>
-<summary>✅ צ'קליסט הגשה</summary>
-
-- [x] README כולל סקירה, בעיה, קהל יעד, מתחרים ובידול
-- [x] תרשים ERD (DBML מוכן ל-dbdiagram.io)
-- [x] רשימת שירותים חיצוניים מפורטת
-- [x] `.env` לא מועלה לריפו (מאומת ב-`.gitignore` + היסטוריית git)
-- [x] לא נדרש משתמש דמו — הרשמה אמיתית
-- [x] קישור Vercel חי — https://meathub-v3.vercel.app
-- [ ] ריפו GitHub ציבורי (לוודא visibility)
-- [ ] צילומי מסך + ERD PNG בתיקיית `screenshots/`
-
-</details>
